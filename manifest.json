@@ -1,0 +1,19 @@
+{
+  "name": "Video player speed control",
+  "description": "Горячии клавиши для ускорения видео плеера",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["scripting", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vk.com/video*",
+        "https://www.youtube.com/watch*",
+        "https://rutube.ru/video/*",
+        "https://www.twitch.tv/videos/*"
+      ],
+      "css": [],
+      "js": ["content-script.js"]
+    }
+  ]
+}
