@@ -2,6 +2,7 @@ function startVKPlay() {
   let observerPlayer;
   let clearControl;
 
+  // следит за изменениями враппера
   function observePlayerWrap() {
     const callback = function(mutationsList, observer) {
       for (let mutation of mutationsList) {
@@ -21,6 +22,7 @@ function startVKPlay() {
     observer.observe(document.body, { childList: true })
   }
 
+  // когда player меняется, перезапускаем все события
   function observePlayer() {
     const callback = function(mutationsList, observer) {
       for(const mutation of mutationsList) {
@@ -53,6 +55,7 @@ function startVKPlay() {
 
 
   function start() {
+    // очищаем предыдущие события
     if(typeof clearControl === 'function')
       clearControl()
     
@@ -66,6 +69,7 @@ function startVKPlay() {
 
     const textSpeedElem = createSpeedViewElem()
 
+    // Смена скорости при нажатии на цифры
     const keypress = (e) => {
       if(e.key >= 1 && e.key <= 9) {
         const speed = 0.25 * e.key
@@ -99,6 +103,7 @@ function startVKPlay() {
     let isMousedown;
     let isSpeed2x = false
 
+    // устанавливаем скорость x2
     playerBox.addEventListener('mousedown', () => {
       saveSpeed = video.playbackRate
       isMousedown = true
@@ -111,6 +116,7 @@ function startVKPlay() {
       }, 500)
     })
   
+    // отменяем x2 и устанавливаем предыдущую скорость
     window.addEventListener('mouseup', () => {
       if(isMousedown) {
         const video = playerBox.querySelector('video')
@@ -131,7 +137,7 @@ function startVKPlay() {
       }
     })
 
-
+    // Показываем в верхнем углу текущую скорость, кроме x1
     function createSpeedViewElem() {
       const textSpeedClassName = '__custom-player-speed-value'
       if(document.querySelector(`.${textSpeedClassName}`)) {
@@ -159,6 +165,7 @@ function startVKPlay() {
       return content
     }
 
+    // для очистки событий, при смене плеера
     return () => {
       document.removeEventListener('keypress', keypress)
       
@@ -202,7 +209,7 @@ function startYoutubePlay() {
         break
       }
     }
-
+    // тайм-коды
     const data = youtubeData?.videoDetails?.shortDescription
     if(!data)
       return console.log('no youtube data', youtubeData)
