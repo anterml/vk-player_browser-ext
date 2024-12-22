@@ -8,6 +8,7 @@
     {
       "matches": [
         "https://vk.com/video*",
+        "https://vkvideo.ru/video*",
         "https://www.youtube.com/watch*",
         "https://rutube.ru/video/*",
         "https://www.twitch.tv/videos/*"
